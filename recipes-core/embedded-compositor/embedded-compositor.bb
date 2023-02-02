@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464"
 SRCREV = "9190c8eb5013c8b6c2642c2d209fda6eed7b438e"
 
 PR = "r0"
-PV = "0.0.0+git${SRCPV}"
+PV = "0.0.9+git${SRCPV}"
 
 SRC_URI = "git://github.com/basysKom/embedded-compositor.git;protocol=https;branch=development"
 
@@ -17,18 +17,19 @@ S = "${WORKDIR}/git"
 inherit qmake5 systemd
 
 DEPENDS += " \
-    qtbase \
-    qtwayland \
-    qtwayland-native \
+      qtbase \
+      qtwayland \
+      qtwayland-native \
 "
 
 RDEPENDS:${PN} = " \
-  qtdeclarative \
-  qtdeclarative-qmlplugins \
-  qtdeclarative-tools \
-  qtgraphicaleffects-qmlplugins \
-  qtsvg-plugins \
-  qtquickcontrols \
+      dbus \
+      qtdeclarative \
+      qtdeclarative-qmlplugins \
+      qtdeclarative-tools \
+      qtgraphicaleffects-qmlplugins \
+      qtsvg-plugins \
+      qtquickcontrols \
 "
 
 QMAKE_PROFILES = "${S}/compositor.pro"
