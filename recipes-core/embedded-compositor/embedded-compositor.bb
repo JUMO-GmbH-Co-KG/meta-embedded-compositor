@@ -1,16 +1,19 @@
 require embedded-compositor-common.inc
 
 SUMMARY = "Embedded Compositor - A Qt Wayland-based compositor suited for industrial HMIs"
-LICENSE = "GPL-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464"
+LICENSE = "GPLv3 & LGPLv3"
+LIC_FILES_CHKSUM = "\
+    file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
+    file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
+"
 
 # set git commit to checkout
-SRCREV = "9190c8eb5013c8b6c2642c2d209fda6eed7b438e"
+SRCREV = "bd2b45763a3a3d7699567295194e274608da3b2f"
 
 PR = "r0"
 PV = "0.0.9+git${SRCPV}"
 
-SRC_URI = "git://github.com/basysKom/embedded-compositor.git;protocol=https;branch=development"
+SRC_URI = "git://github.com/basysKom/embedded-compositor.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
 
