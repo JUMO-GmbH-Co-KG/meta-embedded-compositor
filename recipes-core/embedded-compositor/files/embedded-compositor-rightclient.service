@@ -1,0 +1,13 @@
+[Unit]
+Description=Embedded Compositor - Right Client Example
+
+# If Plymouth is used, we want to start when it is on its way out.
+After=compositor.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/embedded-compositor-env-client
+ExecStart=/usr/share/embeddedcompositor-examples/rightclient
+
+[Install]
+WantedBy=multi-user.target

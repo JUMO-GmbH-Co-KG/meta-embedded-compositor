@@ -1,0 +1,22 @@
+[Unit]
+Description=Embedded Compositor
+After=dbus.service
+RequiresMountsFor=/run
+
+
+[Service]
+Type=simple
+# nedded for i.MX6-GPUs
+#Environment="QT_WAYLAND_CLIENT_BUFFER_INTEGRATION=linux-dmabuf-unstable-v1"
+# DBUS_SESSION_BUS_ADDRESS path have to match in your system
+#Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket"
+Environment="QT_QPA_PLATFORM=eglfs"
+Environment="XDG_RUNTIME_DIR=/run/user/0"
+Environment="XDG_CONFIG_HOME=/run"
+RuntimeDirectory=user/0
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/compositor
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

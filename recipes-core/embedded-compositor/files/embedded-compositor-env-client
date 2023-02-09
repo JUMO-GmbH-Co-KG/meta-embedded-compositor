@@ -1,0 +1,5 @@
+QT_QPA_PLATFORM=wayland
+QT_WAYLAND_SHELL_INTEGRATION=embedded-shell
+XDG_RUNTIME_DIR=/run/user/0
+XDG_CONFIG_HOME=/run
+DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
