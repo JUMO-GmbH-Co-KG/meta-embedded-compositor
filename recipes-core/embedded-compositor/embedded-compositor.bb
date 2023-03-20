@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "\
 "
 
 # set git commit to checkout
-SRCREV = "bd2b45763a3a3d7699567295194e274608da3b2f"
+SRCREV = "ad0d45856f94abc45d9ddde1bc9248fd5e67a7f9"
 
 PR = "r0"
 PV = "0.0.9+git${SRCPV}"
 
-SRC_URI = "git://github.com/basysKom/embedded-compositor.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;branch=main \
            file://${BPN}-env-client \
            file://${BPN}.service \
            file://${BPN}-bottomclient.service \
@@ -42,7 +42,7 @@ RDEPENDS:${PN} = " \
       qtquickcontrols \
 "
 
-QMAKE_PROFILES = "${S}/compositor.pro"
+QMAKE_PROFILES = "${S}/embedded-compositor.pro"
 
 do_install:append() {
   install -d ${D}${systemd_system_unitdir}

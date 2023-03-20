@@ -15,7 +15,7 @@ Environment="XDG_RUNTIME_DIR=/run/user/0"
 Environment="XDG_CONFIG_HOME=/run"
 RuntimeDirectory=user/0
 RuntimeDirectoryPreserve=yes
-ExecStart=/usr/bin/compositor
+ExecStart=/usr/bin/embedded-compositor
 Restart=always
 
 [Install]
