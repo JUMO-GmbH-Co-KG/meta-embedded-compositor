@@ -5,13 +5,12 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-# set git commit to checkout
-SRCREV = "ad0d45856f94abc45d9ddde1bc9248fd5e67a7f9"
+SRCREV = "c816fc02bd5cd4b72442d5aaa4919830c0cf66e3"
 
 PR = "r0"
 PV = "0.0.9+git${SRCPV}"
 
-SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
            file://${BPN}-env-client \
            file://${BPN}.service \
            file://${BPN}-bottomclient.service \
@@ -54,7 +53,7 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/${PN}-topclient.service ${D}${systemd_system_unitdir}
   install -m 0644 ${WORKDIR}/${PN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
-  install -d {D}${sysconfdir}/default
+  install -d ${D}${sysconfdir}/default
   install -m 0644 ${WORKDIR}/embedded-compositor-env-client ${D}${sysconfdir}/default/
 }
 
@@ -75,6 +74,13 @@ SYSTEMD_AUTO_ENABLE:${PN}-demo-clients = "disable"
 
 PACKAGES =+ "${PN}-demo-clients"
 
+FILES_SOLIBSDEV:${PN}:append = " ${libdir}/lib*.so.1 ${libdir}/lib*.so.*.0"
+FILES:${PN}-dev += " \
+                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so \
+                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.1 \
+                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.*.0 \
+                  "
+
 FILES:${PN}-demo-clients += " \
                             ${datadir}/embeddedcompositor-examples/bottomclient \
                             ${datadir}/embeddedcompositor-examples/leftclient \
@@ -91,15 +97,6 @@ FILES:${PN}-demo-clients += " \
                             ${systemd_system_unitdir}/${PN}-widgetcenterclient.service \
                             "
 
-FILES:${PN}-dev +=  " \
-                     ${libdir}/libembeddedplatform.so \
-                     ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so \
-                     ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.1 \
-                     ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.1.0 \
-                     ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.1.0.0 \
-                     ${libdir}/qml/EmbeddedShell/qmldir \
-                    "
-
 FILES:${PN}-staticdev += " \
                           ${libdir}/libembeddedplatform.prl \
                           ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.prl \
@@ -107,8 +104,8 @@ FILES:${PN}-staticdev += " \
 
 FILES:${PN} += " \
                ${libdir}/plugins/wayland-shell-integration/libshellintegration.so* \
-               ${libdir}/liblibembeddedplatform.so.* \
-               ${systemd_system_unitdir}/compositor.service \
+               ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so* \
+               ${libdir}/qml/EmbeddedShell/qmldir \
               "
 
 BBCLASSEXTEND = "native nativesdk"
