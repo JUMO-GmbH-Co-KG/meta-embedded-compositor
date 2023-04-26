@@ -26,35 +26,45 @@ S = "${WORKDIR}/git"
 inherit qmake5 systemd
 
 DEPENDS += " \
+      dbus \
       qtbase \
       qtwayland \
-      qtwayland-native \
-"
-
-RDEPENDS:${PN} = " \
-      dbus \
       qtdeclarative \
+      qtwayland-native \
+      qtbase-native \
+      "
+
+RDEPENDS:${PN}:class-target = " \
       qtdeclarative-qmlplugins \
       qtdeclarative-tools \
       qtgraphicaleffects-qmlplugins \
       qtsvg-plugins \
       qtquickcontrols \
-"
+      "
 
 QMAKE_PROFILES = "${S}/embedded-compositor.pro"
 
 do_install:append() {
   install -d ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-bottomclient.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-leftclient.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-quickcenterclient.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-rightclient.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-topclient.service ${D}${systemd_system_unitdir}
-  install -m 0644 ${WORKDIR}/${PN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-bottomclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-leftclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-quickcenterclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-rightclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-topclient.service ${D}${systemd_system_unitdir}
+  install -m 0644 ${WORKDIR}/${BPN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
   install -d ${D}${sysconfdir}/default
   install -m 0644 ${WORKDIR}/embedded-compositor-env-client ${D}${sysconfdir}/default/
+}
+
+do_install:append:class-nativesdk() {
+  install -d ${D}${SDKPATHNATIVE}/opt/
+  install -d ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
+
+  # using custom sdk path of all embedded-compositor files
+  mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
+  mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
 }
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
@@ -107,5 +117,7 @@ FILES:${PN} += " \
                ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so* \
                ${libdir}/qml/EmbeddedShell/qmldir \
               "
+
+FILES:${PN}:class-nativesdk = "${SDKPATHNATIVE}"
 
 BBCLASSEXTEND = "native nativesdk"
