@@ -9,8 +9,6 @@ Type=simple
 # nedded for i.MX6-GPUs
 #Environment="QT_WAYLAND_CLIENT_BUFFER_INTEGRATION=linux-dmabuf-unstable-v1"
 Environment="QT_QPA_PLATFORM=eglfs"
-Environment="XDG_RUNTIME_DIR=/run/user/0"
-Environment="XDG_CONFIG_HOME=/run"
 RuntimeDirectory=user/0
 RuntimeDirectoryPreserve=yes
 ExecStart=/usr/bin/embedded-compositor

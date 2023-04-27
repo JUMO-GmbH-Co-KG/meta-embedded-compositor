@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=htt
            file://${BPN}-rightclient.service \
            file://${BPN}-topclient.service \
            file://${BPN}-widgetcenterclient.service \
+           file://${BPN}-profile.sh \
            "
 
 S = "${WORKDIR}/git"
@@ -57,16 +58,19 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/${BPN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
   install -d ${D}${sysconfdir}/default
-  install -m 0644 ${WORKDIR}/embedded-compositor-env-client ${D}${sysconfdir}/default/
+  install -m 0644 ${WORKDIR}/${BPN}-env-client ${D}${sysconfdir}/default/
+
+  install -d ${D}${sysconfdir}/profile.d
+  install -m 0644 ${WORKDIR}/${BPN}-profile.sh ${D}${sysconfdir}/profile.d
 }
 
 do_install:append:class-nativesdk() {
   install -d ${D}${SDKPATHNATIVE}/opt/
-  install -d ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
+  install -d ${D}${SDKPATHNATIVE}/opt/${BPN}/
 
   # using custom sdk path of all embedded-compositor files
-  mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
-  mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/embedded-compositor/
+  mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/${BPN}/
+  mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/${BPN}/
 }
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
@@ -100,13 +104,13 @@ FILES:${PN}-demo-clients += " \
                             ${datadir}/embeddedcompositor-examples/rightclient \
                             ${datadir}/embeddedcompositor-examples/topclient \
                             ${datadir}/embeddedcompositor-examples/widgetcenterclient \
-                            ${sysconfdir}/default/${PN}-env-client \
-                            ${systemd_system_unitdir}/${PN}-bottomclient.service \
-                            ${systemd_system_unitdir}/${PN}-leftclient.service \
-                            ${systemd_system_unitdir}/${PN}-quickcenterclient.service \
-                            ${systemd_system_unitdir}/${PN}-rightclient.service \
-                            ${systemd_system_unitdir}/${PN}-topclient.service \
-                            ${systemd_system_unitdir}/${PN}-widgetcenterclient.service \
+                            ${sysconfdir}/default/${BPN}-env-client \
+                            ${systemd_system_unitdir}/${BPN}-bottomclient.service \
+                            ${systemd_system_unitdir}/${BPN}-leftclient.service \
+                            ${systemd_system_unitdir}/${BPN}-quickcenterclient.service \
+                            ${systemd_system_unitdir}/${BPN}-rightclient.service \
+                            ${systemd_system_unitdir}/${BPN}-topclient.service \
+                            ${systemd_system_unitdir}/${BPN}-widgetcenterclient.service \
                             "
 
 FILES:${PN}-staticdev += " \
