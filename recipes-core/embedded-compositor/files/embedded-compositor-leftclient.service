@@ -10,4 +10,4 @@ EnvironmentFile=/etc/default/embedded-compositor-env-client
 ExecStart=/usr/share/embeddedcompositor-examples/leftclient
 
 [Install]
-WantedBy=jupiter-preinit.target
+WantedBy=multi-user.target

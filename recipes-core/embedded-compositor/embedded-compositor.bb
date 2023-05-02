@@ -42,7 +42,9 @@ RDEPENDS:${PN}:class-target = " \
       qtquickcontrols \
       "
 
-QMAKE_PROFILES = "${S}/embedded-compositor.pro"
+TARGET_CFLAGS:class-target += " -DUSE_SYSTEM_BUS"
+
+QMAKE_PROFILES = "${S}/${BPN}.pro"
 
 do_install:append() {
   install -d ${D}${systemd_system_unitdir}
