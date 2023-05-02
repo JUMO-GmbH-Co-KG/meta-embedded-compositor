@@ -25,12 +25,19 @@ S = "${WORKDIR}/git"
 
 inherit qmake5 systemd
 
-DEPENDS += " \
+DEPENDS = " \
       dbus \
       qtbase \
       qtwayland \
       qtdeclarative \
       qtwayland-native \
+      "
+
+DEPENDS:append:class-native = "\
+      qtbase-native \
+      "
+
+DEPENDS:append:class-nativesdk = "\
       qtbase-native \
       "
 
