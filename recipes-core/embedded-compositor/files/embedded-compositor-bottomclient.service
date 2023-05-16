@@ -3,7 +3,8 @@ Description=Embedded Compositor - Bottom Client Example
 Requires=embedded-compositor.service
 
 [Service]
-EnvironmentFile=/etc/default/embedded-compositor-env-client
+EnvironmentFile=/etc/default/embedded-compositor/wayland-client
+EnvironmentFile=/etc/default/embedded-compositor/xdg-path
 ExecStart=/usr/share/embeddedcompositor-examples/bottomclient
 
 [Install]

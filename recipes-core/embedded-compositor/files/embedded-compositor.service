@@ -6,9 +6,10 @@ RequiresMountsFor=/run
 
 [Service]
 Type=simple
+EnvironmentFile=/etc/default/embedded-compositor/xdg-path
+EnvironmentFile=/etc/default/embedded-compositor/screen-orientation
 # nedded for i.MX6-GPUs
 #Environment="QT_WAYLAND_CLIENT_BUFFER_INTEGRATION=linux-dmabuf-unstable-v1"
-EnvironmentFile=/etc/default/embedded-compositor-env-xdg
 Environment="QT_QPA_PLATFORM=eglfs"
 RuntimeDirectory=user/0
 RuntimeDirectoryPreserve=yes
