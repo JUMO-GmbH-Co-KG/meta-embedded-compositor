@@ -11,8 +11,9 @@ PR = "r0"
 PV = "0.0.9+git${SRCPV}"
 
 SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
-           file://${BPN}-env-client \
-           file://${BPN}-env-xdg \
+           file://env/wayland-client \
+           file://env/xdg-path \
+           file://env/screen-orientation \
            file://${BPN}.service \
            file://${BPN}-bottomclient.service \
            file://${BPN}-leftclient.service \
@@ -64,9 +65,10 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/${BPN}-topclient.service ${D}${systemd_system_unitdir}
   install -m 0644 ${WORKDIR}/${BPN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
-  install -d ${D}${sysconfdir}/default
-  install -m 0644 ${WORKDIR}/${BPN}-env-client ${D}${sysconfdir}/default/
-  install -m 0644 ${WORKDIR}/${BPN}-env-xdg ${D}${sysconfdir}/default/
+  install -d ${D}${sysconfdir}/default/${BPN}
+  install -m 0644 ${WORKDIR}/env/wayland-client ${D}${sysconfdir}/default/${BPN}/
+  install -m 0644 ${WORKDIR}/env/xdg-path ${D}${sysconfdir}/default/${BPN}/
+  install -m 0644 ${WORKDIR}/env/screen-orientation ${D}${sysconfdir}/default/${BPN}/
 }
 
 do_install:append:class-nativesdk() {
