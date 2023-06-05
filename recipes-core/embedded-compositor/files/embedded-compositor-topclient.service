@@ -8,6 +8,7 @@ After=compositor.service
 Type=simple
 EnvironmentFile=/etc/default/embedded-compositor/wayland-client
 EnvironmentFile=/etc/default/embedded-compositor/xdg-path
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket"
 ExecStart=/usr/share/embedded-compositor-testclients/topclient
 
 [Install]
