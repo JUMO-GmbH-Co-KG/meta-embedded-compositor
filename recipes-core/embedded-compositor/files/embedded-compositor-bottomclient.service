@@ -5,7 +5,7 @@ Requires=embedded-compositor.service
 [Service]
 EnvironmentFile=/etc/default/embedded-compositor/wayland-client
 EnvironmentFile=/etc/default/embedded-compositor/xdg-path
-ExecStart=/usr/share/embeddedcompositor-examples/bottomclient
+ExecStart=/usr/share/embedded-compositor-testclients/bottomclient
 
 [Install]
 WantedBy=multi-user.target
