@@ -65,8 +65,6 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/${BPN}-topclient.service ${D}${systemd_system_unitdir}
   install -m 0644 ${WORKDIR}/${BPN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
-  install -d ${D}${datadir}/${BPN}-testclients/
-
   install -d ${D}${sysconfdir}/default/${BPN}
   install -m 0644 ${WORKDIR}/env/wayland-client ${D}${sysconfdir}/default/${BPN}/
   install -m 0644 ${WORKDIR}/env/xdg-path ${D}${sysconfdir}/default/${BPN}/
@@ -80,6 +78,9 @@ do_install:append:class-nativesdk() {
   # using custom sdk path of all embedded-compositor files
   mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/${BPN}/
   mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/${BPN}/
+
+  # we don't want the nativesdk testclients build
+  rm -rf ${D}/usr/share
 }
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
@@ -99,12 +100,8 @@ SYSTEMD_AUTO_ENABLE:${PN}-demo-clients = "disable"
 
 PACKAGES =+ "${PN}-demo-clients"
 
-FILES_SOLIBSDEV:${PN}:append = " ${libdir}/lib*.so.1 ${libdir}/lib*.so.*.0"
-FILES:${PN}-dev += " \
-                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so \
-                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.1 \
-                    ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so.*.0 \
-                  "
+INSANE_SKIP:${PN} += "dev-so"
+FILES_SOLIBSDEV = ""
 
 FILES:${PN}-demo-clients += " \
                             ${datadir}/${BPN}-testclients/bottomclient \
@@ -121,14 +118,12 @@ FILES:${PN}-demo-clients += " \
                             ${systemd_system_unitdir}/${BPN}-widgetcenterclient.service \
                             "
 
-FILES:${PN}-staticdev += " \
-                          ${libdir}/libembeddedplatform.prl \
-                          ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.prl \
-                         "
-
 FILES:${PN} += " \
-               ${libdir}/plugins/wayland-shell-integration/libshellintegration.so* \
+               ${libdir}/libembeddedplatform.prl \
+               ${libdir}/libembeddedplatform.so \
+               ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.prl \
                ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so* \
+               ${libdir}/plugins/wayland-shell-integration/libshellintegration.so* \
                ${libdir}/qml/EmbeddedShell/qmldir \
               "
 
