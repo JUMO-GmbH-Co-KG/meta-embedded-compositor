@@ -69,6 +69,12 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/env/wayland-client ${D}${sysconfdir}/default/${BPN}/
   install -m 0644 ${WORKDIR}/env/xdg-path ${D}${sysconfdir}/default/${BPN}/
   install -m 0644 ${WORKDIR}/env/screen-orientation ${D}${sysconfdir}/default/${BPN}/
+
+  # add needed header files to sdk
+  install -d ${D}${includedir}/${BPN}
+  cp -f ${S}/embeddedplatform/embeddedplatform.h ${D}${includedir}/${BPN}
+  cp -f ${S}/embeddedplatform/embeddedshellanchor.h ${D}${includedir}/${BPN}
+  cp -f ${S}/embeddedplatform/embeddedshellsurface.h ${D}${includedir}/${BPN}
 }
 
 do_install:append:class-nativesdk() {
@@ -78,9 +84,8 @@ do_install:append:class-nativesdk() {
   # using custom sdk path of all embedded-compositor files
   mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/${BPN}/
   mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/${BPN}/
+  mv ${D}/usr/share ${D}${SDKPATHNATIVE}/opt/${BPN}/
 
-  # we don't want the nativesdk testclients build
-  rm -rf ${D}/usr/share
 }
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
@@ -102,6 +107,10 @@ PACKAGES =+ "${PN}-demo-clients"
 
 INSANE_SKIP:${PN} += "dev-so"
 FILES_SOLIBSDEV = ""
+
+FILES:${PN}-dev += " \
+                    ${includedir}/${BPN} \
+                   "
 
 FILES:${PN}-demo-clients += " \
                             ${datadir}/${BPN}-testclients/bottomclient \
