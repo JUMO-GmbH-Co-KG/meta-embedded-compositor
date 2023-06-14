@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "e3f9eb55a5f0150a2836e945d2a078ddf32d1215"
+SRCREV = "39c21da46bd312ea8484069a4cede9460b0a734a"
 
 PR = "r0"
 PV = "1.0.0+git${SRCPV}"
@@ -65,6 +65,8 @@ do_install:append() {
   install -m 0644 ${WORKDIR}/${BPN}-topclient.service ${D}${systemd_system_unitdir}
   install -m 0644 ${WORKDIR}/${BPN}-widgetcenterclient.service ${D}${systemd_system_unitdir}
 
+  install -d ${D}${datadir}/${BPN}-testclients/
+
   install -d ${D}${sysconfdir}/default/${BPN}
   install -m 0644 ${WORKDIR}/env/wayland-client ${D}${sysconfdir}/default/${BPN}/
   install -m 0644 ${WORKDIR}/env/xdg-path ${D}${sysconfdir}/default/${BPN}/
@@ -105,12 +107,12 @@ FILES:${PN}-dev += " \
                   "
 
 FILES:${PN}-demo-clients += " \
-                            ${datadir}/embeddedcompositor-examples/bottomclient \
-                            ${datadir}/embeddedcompositor-examples/leftclient \
-                            ${datadir}/embeddedcompositor-examples/quickcenterclient \
-                            ${datadir}/embeddedcompositor-examples/rightclient \
-                            ${datadir}/embeddedcompositor-examples/topclient \
-                            ${datadir}/embeddedcompositor-examples/widgetcenterclient \
+                            ${datadir}/${BPN}-testclients/bottomclient \
+                            ${datadir}/${BPN}-testclients/leftclient \
+                            ${datadir}/${BPN}-testclients/quickcenterclient \
+                            ${datadir}/${BPN}-testclients/rightclient \
+                            ${datadir}/${BPN}-testclients/topclient \
+                            ${datadir}/${BPN}-testclients/widgetcenterclient \
                             ${systemd_system_unitdir}/${BPN}-bottomclient.service \
                             ${systemd_system_unitdir}/${BPN}-leftclient.service \
                             ${systemd_system_unitdir}/${BPN}-quickcenterclient.service \
