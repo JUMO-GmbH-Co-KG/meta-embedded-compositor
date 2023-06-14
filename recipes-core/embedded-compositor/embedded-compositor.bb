@@ -85,7 +85,6 @@ do_install:append:class-nativesdk() {
   mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/${BPN}/
   mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/${BPN}/
   mv ${D}/usr/share ${D}${SDKPATHNATIVE}/opt/${BPN}/
-
 }
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
