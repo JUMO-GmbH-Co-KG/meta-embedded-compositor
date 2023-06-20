@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "39c21da46bd312ea8484069a4cede9460b0a734a"
+SRCREV = "ccef2fb00ba918afe417d2b6538dbc3a31d041de"
 
 PR = "r0"
-PV = "1.0.0+git${SRCPV}"
+PV = "1.0.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
            file://env/wayland-client \
