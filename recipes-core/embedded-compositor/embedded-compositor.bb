@@ -1,14 +1,14 @@
 SUMMARY = "Embedded Compositor - A Qt Wayland-based compositor suited for industrial HMIs"
-LICENSE = "GPLv3 & LGPLv3"
+LICENSE = "GPL-3.0-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "\
     file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "352bb62cf9da00e3ca1e03d97bb73e8ebe1d23bb"
+SRCREV = "d736319578eaba2c04a778504ceb49a5bb23f0ff"
 
 PR = "r0"
-PV = "1.0.1+git${SRCPV}"
+PV = "1.0.2+git${SRCPV}"
 
 SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
            file://env/wayland-client \
