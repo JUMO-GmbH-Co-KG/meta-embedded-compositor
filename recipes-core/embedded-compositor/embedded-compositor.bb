@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "d736319578eaba2c04a778504ceb49a5bb23f0ff"
+SRCREV = "a54879f2336a93ece34c57914a6a78aefc11df98"
 
 PR = "r0"
 PV = "1.0.2+git${SRCPV}"
