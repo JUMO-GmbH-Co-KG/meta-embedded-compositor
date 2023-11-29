@@ -1,11 +1,11 @@
 SUMMARY = "Embedded Compositor - A Qt Wayland-based compositor suited for industrial HMIs"
-LICENSE = "GPLv3 & LGPLv3"
+LICENSE = "GPL-3.0-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "\
     file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "e8cd6e593b3977fc76756320ce57aa19239d7f35"
+SRCREV = "849b3092379c619d10ac94a6833b44b33fd98b15"
 
 PR = "r0"
 PV = "1.0.2+git${SRCPV}"
