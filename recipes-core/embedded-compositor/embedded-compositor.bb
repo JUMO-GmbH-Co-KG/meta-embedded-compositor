@@ -22,7 +22,7 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "7abccf6a5a4b24b624126f41d2f622eef8e1fcd7"
+SRCREV = "5288de2e5e4c70fae766ac548011affa605f6aca"
 
 S = "${WORKDIR}/git"
 
