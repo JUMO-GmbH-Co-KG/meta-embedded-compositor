@@ -5,25 +5,27 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-SRCREV = "b260aaebdf6797ab51190551c2decd00db1c1e95"
-
 PR = "r0"
-PV = "1.0.5+git${SRCPV}"
+PV = "1.0.6"
 
-SRC_URI = "git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
-           file://env/wayland-client \
-           file://env/xdg-path \
-           file://env/screen-orientation \
-           file://${BPN}.service \
-           file://${BPN}-bottomclient.service \
-           file://${BPN}-leftclient.service \
-           file://${BPN}-quickcenterclient.service \
-           file://${BPN}-rightclient.service \
-           file://${BPN}-topclient.service \
-           file://${BPN}-widgetcenterclient.service \
+SRC_URI = " \
+            git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
+            file://env/wayland-client \
+            file://env/xdg-path \
+            file://env/screen-orientation \
+            file://${BPN}.service \
+            file://${BPN}-bottomclient.service \
+            file://${BPN}-leftclient.service \
+            file://${BPN}-quickcenterclient.service \
+            file://${BPN}-rightclient.service \
+            file://${BPN}-topclient.service \
+            file://${BPN}-widgetcenterclient.service \
            "
 
+SRCREV = "5288de2e5e4c70fae766ac548011affa605f6aca"
+
 S = "${WORKDIR}/git"
+
 
 inherit qmake5 systemd
 
@@ -33,22 +35,16 @@ DEPENDS = " \
       qtwayland \
       qtdeclarative \
       qtwayland-native \
+      qtvirtualkeyboard \
       "
 
-DEPENDS:append:class-native = "\
-      qtbase-native \
-      "
-
-DEPENDS:append:class-nativesdk = "\
-      qtbase-native \
-      "
-
-RDEPENDS:${PN}:class-target = " \
+RDEPENDS:${PN} = " \
       qtdeclarative-qmlplugins \
       qtdeclarative-tools \
       qtgraphicaleffects-qmlplugins \
       qtsvg-plugins \
       qtquickcontrols \
+      qtvirtualkeyboard \
       "
 
 TARGET_CFLAGS:class-target += " -DUSE_SYSTEM_BUS"
@@ -72,20 +68,13 @@ do_install:append() {
 
   # add needed header files to sdk
   install -d ${D}${includedir}/${BPN}
-  cp -f ${S}/embeddedplatform/embeddedplatform.h ${D}${includedir}/${BPN}
-  cp -f ${S}/embeddedplatform/embeddedshellanchor.h ${D}${includedir}/${BPN}
-  cp -f ${S}/embeddedplatform/embeddedshellsurface.h ${D}${includedir}/${BPN}
+  install -m 644 ${S}/embeddedplatform/embeddedplatform.h ${D}${includedir}/${BPN}
+  install -m 644 ${S}/embeddedplatform/embeddedshellanchor.h ${D}${includedir}/${BPN}
+  install -m 644 ${S}/embeddedplatform/embeddedshellsurface.h ${D}${includedir}/${BPN}
+  install -m 644 ${S}/embeddedplatform/embeddedcompositordbusclient.h ${D}${includedir}/${BPN}
+
 }
 
-do_install:append:class-nativesdk() {
-  install -d ${D}${SDKPATHNATIVE}/opt/
-  install -d ${D}${SDKPATHNATIVE}/opt/${BPN}/
-
-  # using custom sdk path of all embedded-compositor files
-  mv ${D}/usr/bin ${D}${SDKPATHNATIVE}/opt/${BPN}/
-  mv ${D}/usr/lib ${D}${SDKPATHNATIVE}/opt/${BPN}/
-  mv ${D}/usr/share ${D}${SDKPATHNATIVE}/opt/${BPN}/
-}
 
 SYSTEMD_PACKAGES ="${PN} ${PN}-demo-clients"
 
@@ -135,6 +124,3 @@ FILES:${PN} += " \
                ${libdir}/qml/EmbeddedShell/qmldir \
               "
 
-FILES:${PN}:class-nativesdk = "${SDKPATHNATIVE}"
-
-BBCLASSEXTEND = "native nativesdk"
