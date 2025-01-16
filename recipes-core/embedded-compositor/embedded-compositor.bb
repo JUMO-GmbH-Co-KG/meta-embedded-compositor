@@ -36,6 +36,7 @@ DEPENDS = " \
       qtdeclarative \
       qtwayland-native \
       qtvirtualkeyboard \
+      vnc-eglfs \
       "
 
 RDEPENDS:${PN} = " \
