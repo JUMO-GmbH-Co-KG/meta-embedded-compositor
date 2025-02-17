@@ -20,7 +20,7 @@ provided in the /licenses subdirectory to be collected by bitbake.
 ## Dependencies
 This layer depends on packages provided by the following layers:
 * `meta-openembedded` [http://cgit.openembedded.org/meta-openembedded/]
-* `meta-qt5` [https://github.com/meta-qt5/meta-qt5.git]
+* `meta-qt6` [https://code.qt.io/cgit/yocto/meta-qt6.git/]
 
 Configuration
 =============
@@ -32,7 +32,7 @@ Configuration
 3. Add dependency layers to `conf/bblayers.conf`
 ```bitbake
     BBLAYERS += "path/to/meta-openembedded/meta-oe"
-    BBLAYERS += "path/to/meta-qt5"
+    BBLAYERS += "path/to/meta-qt6"
 ```
 
 Usage

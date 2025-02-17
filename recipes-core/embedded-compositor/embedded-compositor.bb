@@ -1,4 +1,4 @@
-SUMMARY = "Embedded Compositor - A Qt Wayland-based compositor suited for industrial HMIs"
+SUMMARY = "Embedded Compositor - A Qt Wayland-based compositor suited for industrial HMIs based on Qt6"
 LICENSE = "GPL-3.0-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "\
     file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 PR = "r0"
-PV = "1.0.16"
+PV = "1.1.0"
 
 SRC_URI = " \
             git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
@@ -22,28 +22,30 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "78d9e15be81acec0ea4c694d789c7e4a555be430"
+SRCREV = "9ca7355fa82f23be29955c98589693ecae86faa4"
 
 S = "${WORKDIR}/git"
 
 
-inherit qmake5 systemd
+inherit qt6-qmake systemd features_check
+
+REQUIRED_DISTRO_FEATURES = "wayland"
+
 
 DEPENDS = " \
       dbus \
       qtbase \
-      qtwayland \
       qtdeclarative \
-      qtwayland-native \
       qtvirtualkeyboard \
+      qtwayland \
+      qtwayland-native \
       "
 
 RDEPENDS:${PN} = " \
+      qtdeclarative \
       qtdeclarative-qmlplugins \
       qtdeclarative-tools \
-      qtgraphicaleffects-qmlplugins \
       qtsvg-plugins \
-      qtquickcontrols \
       qtvirtualkeyboard \
       "
 
