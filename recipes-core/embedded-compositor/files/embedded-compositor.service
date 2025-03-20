@@ -8,9 +8,14 @@ RequiresMountsFor=/run
 Type=simple
 EnvironmentFile=/etc/default/embedded-compositor/xdg-path
 EnvironmentFile=/etc/default/embedded-compositor/screen-orientation
-# nedded for i.MX6-GPUs
+
+# Needed for i.MX6 GPUs, see documentation: https://doc.qt.io/qt-6/qtwaylandcompositor-attribution-wayland-linux-dmabuf-unstable-v1.html
 #Environment="QT_WAYLAND_CLIENT_BUFFER_INTEGRATION=linux-dmabuf-unstable-v1"
 Environment="QT_QPA_PLATFORM=eglfs"
+
+# For more information, see documentation: https://docs.mesa3d.org/envvars.html
+#Environment="GALLIUM_HUD=fps"
+
 RuntimeDirectory=user/0
 RuntimeDirectoryPreserve=yes
 ExecStart=/usr/bin/embedded-compositor
