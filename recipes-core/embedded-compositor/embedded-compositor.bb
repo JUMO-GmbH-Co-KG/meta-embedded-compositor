@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 PR = "r0"
-PV = "1.1.1"
+PV = "1.1.3"
 
 SRC_URI = " \
             git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
@@ -22,12 +22,12 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "e54ed61690c5c2e3cbe848a27e918938979a8d05"
+SRCREV = "7f5e943d1befb49e8df6733dcc8e3982930fc864"
 
 S = "${WORKDIR}/git"
 
 
-inherit qt6-qmake systemd features_check
+inherit qt6-cmake systemd features_check
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
@@ -51,7 +51,6 @@ RDEPENDS:${PN} = " \
 
 TARGET_CFLAGS:class-target += " -DUSE_SYSTEM_BUS"
 
-QMAKE_PROFILES = "${S}/${BPN}.pro"
 
 do_install:append() {
   install -d ${D}${systemd_system_unitdir}
