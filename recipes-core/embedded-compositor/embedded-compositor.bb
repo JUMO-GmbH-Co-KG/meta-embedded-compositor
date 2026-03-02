@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 PR = "r0"
-PV = "1.1.3"
+PV = "1.1.4"
 
 SRC_URI = " \
             git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
@@ -22,7 +22,7 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "7f5e943d1befb49e8df6733dcc8e3982930fc864"
+SRCREV = "b1d66d15cc6cf8d7cd7c479731c092b7c62b5350"
 
 S = "${WORKDIR}/git"
 
@@ -123,5 +123,6 @@ FILES:${PN} += " \
                ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so* \
                ${libdir}/plugins/wayland-shell-integration/libshellintegration.so* \
                ${libdir}/qml/EmbeddedShell/qmldir \
+               ${libdir}/qml/EmbeddedShell/quickembeddedshellwindow.qmltypes \
               "
 
