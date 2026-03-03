@@ -98,7 +98,10 @@ INSANE_SKIP:${PN} += "dev-so"
 FILES_SOLIBSDEV = ""
 
 FILES:${PN}-dev += " \
-                    ${includedir}/${BPN} \
+                   ${includedir}/${BPN} \
+                   ${libdir}/libembeddedplatform.prl \
+                   ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.prl \
+                   ${libdir}/qml/EmbeddedShell/quickembeddedshellwindow.qmltypes \
                    "
 
 FILES:${PN}-demo-clients += " \
@@ -117,12 +120,8 @@ FILES:${PN}-demo-clients += " \
                             "
 
 FILES:${PN} += " \
-               ${libdir}/libembeddedplatform.prl \
                ${libdir}/libembeddedplatform.so \
-               ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.prl \
                ${libdir}/qml/EmbeddedShell/libquickembeddedshellwindow.so* \
                ${libdir}/plugins/wayland-shell-integration/libshellintegration.so* \
                ${libdir}/qml/EmbeddedShell/qmldir \
-               ${libdir}/qml/EmbeddedShell/quickembeddedshellwindow.qmltypes \
-              "
-
+               "
