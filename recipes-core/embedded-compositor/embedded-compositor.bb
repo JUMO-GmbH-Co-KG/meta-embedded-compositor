@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.LGPLv3;md5=9d5fd3dc9dd7a9225a53a8123d0360c5 \
 "
 
-PR = "r0"
+PR = "r1"
 PV = "1.1.6"
 
 SRC_URI = " \
@@ -22,7 +22,7 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "9ee29f8c0e94a101ad35940359c78b9e8bd910e9"
+SRCREV = "cb20ab03962395e0a59112039984f4c740a5c021"
 
 S = "${WORKDIR}/git"
 
