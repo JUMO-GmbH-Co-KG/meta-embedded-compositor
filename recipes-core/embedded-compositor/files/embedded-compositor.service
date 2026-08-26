@@ -12,6 +12,7 @@ EnvironmentFile=/etc/default/embedded-compositor/screen-orientation
 # Needed for i.MX6 GPUs, see documentation: https://doc.qt.io/qt-6/qtwaylandcompositor-attribution-wayland-linux-dmabuf-unstable-v1.html
 #Environment="QT_WAYLAND_CLIENT_BUFFER_INTEGRATION=linux-dmabuf-unstable-v1"
 Environment="QT_QPA_PLATFORM=eglfs"
+Environment="QSG_TRANSIENT_IMAGES=1"
 
 # For more information, see documentation: https://docs.mesa3d.org/envvars.html
 #Environment="GALLIUM_HUD=fps"
