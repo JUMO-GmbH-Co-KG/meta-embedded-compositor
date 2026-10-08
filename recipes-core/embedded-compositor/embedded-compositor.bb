@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 PR = "r0"
-PV = "1.1.11"
+PV = "1.1.12"
 
 SRC_URI = " \
             git://github.com/JUMO-GmbH-Co-KG/embedded-compositor.git;protocol=https;nobranch=1 \
@@ -22,7 +22,7 @@ SRC_URI = " \
             file://${BPN}-widgetcenterclient.service \
            "
 
-SRCREV = "d1bd07b6f76f7472820a748058cd93e71b126962"
+SRCREV = "8fdf23403ec72e097ea2449bed2fd13a6f5651d4"
 
 S = "${WORKDIR}/git"
 
